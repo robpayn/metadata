@@ -8,6 +8,7 @@
 #' @importFrom shiny updateTextAreaInput
 #' @importFrom shiny fileInput
 #' @importFrom shiny observeEvent
+#' @importFrom shiny tags
 
 # Class MetadataNarrative ####
 
@@ -23,6 +24,10 @@
 MetadataNarrative <- R6Class(
   classname = "MetadataNarrative",
   public = list(
+
+    input = NULL,
+    output = NULL,
+    session = NULL,
 
     name = NULL,
 
@@ -170,13 +175,17 @@ MetadataNarrative <- R6Class(
             width = "100%"
           )
 
-        ) # end list
+        )
 
-      ) # end return
+      )
 
     },
 
     createShinyServer = function(input, output, session) {
+
+      self$input <- input;
+      self$output <- output;
+      self$session <- session;
 
       observeEvent(
         eventExpr = input[[self$idTextTitle]],
@@ -278,10 +287,10 @@ MetadataNarrative <- R6Class(
 
     },
 
-    updateShiny = function(input, output, session) {
+    updateShinyUI = function() {
 
       updateTextAreaInput(
-        session = session,
+        session = self$session,
         inputId = self$idTextTitle,
         value = ifelse(
           is.null(self$title),
@@ -291,7 +300,7 @@ MetadataNarrative <- R6Class(
       );
 
       updateTextAreaInput(
-        session = session,
+        session = self$session,
         inputId = self$idTextAbstract,
         value = ifelse(
           is.null(self$abstract),
@@ -301,7 +310,7 @@ MetadataNarrative <- R6Class(
       );
 
       updateTextAreaInput(
-        session = session,
+        session = self$session,
         inputId = self$idTextPurpose,
         value = ifelse(
           is.null(self$purpose),
@@ -311,7 +320,7 @@ MetadataNarrative <- R6Class(
       );
 
       updateTextAreaInput(
-        session = session,
+        session = self$session,
         inputId = self$idTextIntellectualRights,
         value = ifelse(
           is.null(self$intellectualRights),
@@ -321,7 +330,7 @@ MetadataNarrative <- R6Class(
       );
 
       updateTextAreaInput(
-        session = session,
+        session = self$session,
         inputId = self$idTextMethods,
         value = ifelse(
           is.null(self$methods),
@@ -331,7 +340,7 @@ MetadataNarrative <- R6Class(
       );
 
       updateTextInput(
-        session = session,
+        session = self$session,
         inputId = self$idTextOutputFile,
         value = ifelse(
           is.null(self$outputRData),

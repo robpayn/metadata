@@ -1,0 +1,932 @@
+---
+title: "Metadata"
+---
+
+```{r setup, include=FALSE}
+
+# Do not echo code chunks in rendered document
+
+knitr::opts_chunk$set(echo = FALSE);
+
+# Do not render values returned by code in code chunks
+
+knitr::opts_chunk$set(results = "hide")
+
+# Clear the global environment
+
+rm(list = ls());
+
+# Load the tidyr package for use of the pipe operator
+
+library(tidyr)
+
+```
+
+<!-- Automatically populate a description of the compilation of this file. -->
+
+Generated from R markdown file **./02_protocol/`r knitr::current_input()`**, last compiled on `r Sys.time()`
+
+```{r}
+
+# Make sure that target directory for EML exists
+
+emlalPath <- "./03_incremental/temp/EML";
+dir.create(
+  path = emlalPath,
+  recursive = TRUE,
+  showWarnings = FALSE
+);
+
+
+# Read the project attributes table
+# and restructure for convenience.
+
+atts <- as.data.frame(
+  t(as.matrix(
+    readxl::read_excel(
+      path = "./01_input/meta/attributes.xlsx",
+      sheet = "attributes",
+      range = readxl::cell_limits(ul = c(2, 3)),
+      col_names = TRUE,
+      col_types = rep("text", times = 10)
+    )
+  ))
+);
+names(atts) <- readxl::read_excel(
+  path = "./01_input/meta/attributes.xlsx",
+  sheet = "attributes",
+  range = readxl::cell_limits(ul = c(3, 2), lr = c(NA, 2)),
+  col_names = "rownames",
+  col_types = "text"
+)$rownames;
+atts[is.na(atts)] <- "";
+
+# Load the incremental metadata from data processing
+
+metaEnv <- readRDS(file = "./03_incremental/temp/metadata.RData");
+metadataNarrative <- readRDS(file = "./03_incremental/meta/metadata_narrative.RData");
+metadataPeople <- readRDS(file = "./03_incremental/meta/metadata_people.RData");
+
+```
+
+
+# Dataset Title
+
+**`r metadataNarrative$title`**
+
+
+# Abstract
+
+```{r}
+
+# Write the abstract file to the EML directory
+
+write(
+  x = metadataNarrative$abstract,
+  file = sprintf(
+    "%s/abstract.md",
+    emlalPath
+  )
+);
+
+```
+
+`r metadataNarrative$abstract`
+
+
+# Purpose
+
+`r metadataNarrative$purpose `
+
+
+# Creators
+
+```{r}
+
+# Define rows of the personnel table for creators
+
+creators <- do.call(
+  what = rbind,
+  args = lapply(
+    X = metadataPeople$creators$elements,
+    FUN = function(creator) {
+      return(
+        data.frame(
+          creator$givenName,
+          creator$middleName,
+          creator$surname,
+          creator$org,
+          creator$email,
+          creator$orcid,
+          creator$role
+        )
+      )
+    }
+  )
+);
+row.names(creators) <- NULL;
+names(creators) <- c(
+  "givenName",
+  "middleInitial",
+  "surName",
+  "organizationName",
+  "electronicMailAddress",
+  "userId",
+  "role"
+);
+
+personnel <- creators;
+
+creators <- creators[names(creators) != "role"];
+names(creators) <- c(
+  "First Name",
+  "Middle Initial",
+  "Last Name",
+  "Organization",
+  "e-mail address",
+  "ORCID"
+);
+
+```
+
+`r knitr::kable(creators) `
+
+
+# Primary contact 
+
+```{r}
+
+# Define row of the personnel table for the primary contact
+
+contact <- data.frame(
+  metadataPeople$contact$givenName,
+  metadataPeople$contact$middleName,
+  metadataPeople$contact$surname,
+  metadataPeople$contact$org,
+  metadataPeople$contact$email,
+  metadataPeople$contact$orcid,
+  metadataPeople$contact$role
+);
+row.names(contact) <- NULL;
+names(contact) <- c(
+  "givenName",
+  "middleInitial",
+  "surName",
+  "organizationName",
+  "electronicMailAddress",
+  "userId",
+  "role"
+);
+
+personnel <- rbind(personnel, contact);
+
+contact <- contact[names(contact) != "role"];
+names(contact) <- c(
+  "First Name",
+  "Middle Initial",
+  "Last Name",
+  "Organization",
+  "e-mail address",
+  "ORCID"
+);
+
+```
+
+`r knitr::kable(contact) `
+
+
+# Other personnel roles
+
+```{r}
+
+# Define rows of the personnel table for other roles
+
+others <- do.call(
+  what = rbind,
+  args = lapply(
+    X = metadataPeople$others$elements,
+    FUN = function(other) {
+      return(
+        data.frame(
+          other$givenName,
+          other$middleName,
+          other$surname,
+          other$org,
+          other$email,
+          other$orcid,
+          other$role
+        )
+      )
+    }
+  )
+);
+row.names(others) <- NULL;
+names(others) <- c(
+  "givenName",
+  "middleInitial",
+  "surName",
+  "organizationName",
+  "electronicMailAddress",
+  "userId",
+  "role"
+);
+
+personnel <- rbind(personnel, others);
+
+names(others) <- c(
+  "First Name",
+  "Middle Initial",
+  "Last Name",
+  "Organization",
+  "e-mail address",
+  "ORCID",
+  "Role"
+);
+
+```
+
+`r knitr::kable(others) `
+
+
+# License
+
+```{r}
+
+# Write the license file to the EML directory
+
+write(
+  x = metadataNarrative$intellectualRights,
+  file = sprintf(
+    "%s/intellectual_rights.txt",
+    emlalPath
+  )
+);
+
+```
+
+`r metadataNarrative$intellectualRights `
+
+
+# Keywords
+
+```{r}
+
+# Create the keywords table
+
+keywords <- rbind.data.frame(
+  list(keyword = "Upper Clark Fork River restoration", keywordThesaurus = ""),
+  list(keyword = "NSF DEB LTREB 1655197", keywordThesaurus = ""),
+  list(keyword = "Montana", keywordThesaurus = ""),
+  list(keyword = "Northwestern United States", keywordThesaurus = ""),
+  list(keyword = "Northwestern Forested Mountains Ecoregion", keywordThesaurus = ""),
+  list(keyword = "organic matter", keywordThesaurus = "LTER Controlled Vocabulary"),
+  list(keyword = "algae", keywordThesaurus = "LTER Controlled Vocabulary"),
+  list(keyword = "biomass", keywordThesaurus = "LTER Controlled Vocabulary"),
+  list(keyword = "benthos", keywordThesaurus = "LTER Controlled Vocabulary"),
+  list(keyword = "epilithon", keywordThesaurus = "")
+);
+
+# Function to generate a markdown character string with
+# the keywords grouped by thesaurus
+
+printKeywords <- function(keywords)
+{
+  kw <- split(x = keywords, f = keywords$keywordThesaurus);
+  names(kw)[names(kw) == ""] <- "No thesaurus";
+  kwString <- "";
+  for(name in names(kw)) {
+    kwString <- paste0(
+      kwString,
+      "**", name, ":** ",
+      paste(kw[[name]]$keyword, collapse = ", "),
+      " \n\n"
+    );
+  }
+  return(kwString);
+}
+
+```
+
+`r printKeywords(keywords) `
+
+```{r}
+
+# Write the keywords table to the EML directory
+
+write.table(
+  x = keywords,
+  file = sprintf(
+    "%s/keywords.txt",
+    emlalPath
+  ),
+  sep = "\t",
+  row.names = FALSE,
+  quote = FALSE,
+  na = ""
+)
+
+```
+
+
+# Funding of this work
+
+```{r}
+
+# Define rows of the personnel table for funding sources
+
+funding <- do.call(
+  what = rbind,
+  args = lapply(
+    X = metadataPeople$funding$elements,
+    FUN = function(fund) {
+      return(
+        data.frame(
+          fund$givenName,
+          fund$middleName,
+          fund$surname,
+          fund$org,
+          fund$email,
+          fund$orcid,
+          fund$role,
+          fund$project,
+          fund$agency,
+          fund$awardNumber
+        )
+      )
+    }
+  )
+);
+row.names(funding) <- NULL;
+names(funding) <- c(
+  "givenName",
+  "middleInitial",
+  "surName",
+  "organizationName",
+  "electronicMailAddress",
+  "userId",
+  "role",
+  "projectTitle",
+  "fundingAgency",
+  "fundingNumber"
+);
+
+personnel$projectTitle <- NA;
+personnel$fundingAgency <- NA;
+personnel$fundingNumber <- NA;
+personnel <- rbind(personnel, funding);
+
+funding <- funding[names(funding) != "role"];
+names(funding) <- c(
+  "First Name",
+  "Middle Initial",
+  "Last Name",
+  "Organization",
+  "e-mail address",
+  "ORCID",
+  "Project",
+  "Funding source",
+  "Award number"
+);
+
+```
+
+`r knitr::kable(funding) `
+
+```{r}
+
+# Write the personnel table to the EML directory
+
+write.table(
+  x = personnel,
+  file = sprintf(
+    "%s/personnel.txt",
+    emlalPath
+  ),
+  sep = "\t",
+  row.names = FALSE,
+  quote = FALSE,
+  na = ""
+)
+
+```
+
+
+# Timeframe
+
+```{r}
+
+maintenance.description <- "Completed: Updates to these data are not expected"
+
+```
+
+* Begin date: `r format(metaEnv$startTime, format = "%e %B %Y")`, Date code: `r format(metaEnv$startTime, format = "%Y%m%d")`
+* End date: `r format(metaEnv$endTime, format = "%e %B %Y")`, Date code: `r format(metaEnv$endTime, format = "%Y%m%d")`
+* `r maintenance.description `
+
+
+# Geographic location
+
+```{r}
+
+# Read the projects sites table
+
+sitesIn <- readxl::read_excel(
+  path = "./01_input/meta/2021 Site Table.xlsx",
+  sheet = "Table 1",
+  range = readxl::cell_limits(ul = c(4, 2)),
+  col_names = TRUE,
+  col_types = c(
+    rep("text", times = 4),
+    rep("numeric", times = 6)
+  )
+);
+sites <- as.data.frame(sitesIn[,1:4]);
+
+# Create decimal degrees latitude and longitude columns
+
+sites$lat <- 
+  sitesIn$LatDegreeNorth + 
+  sitesIn$LatMinuteNorth / 60 + 
+  sitesIn$LatSecondNorth / 3600;
+
+sites$long <-
+  - sitesIn$LongDegreeWest -
+  sitesIn$LongMinuteWest / 60 -
+  sitesIn$LongSecondWest / 3600;
+
+# Assign row names to site names for indexing
+
+rownames(sites) <- sites$SiteID;
+
+# Filter out the sites covered by this data product
+
+sites <- sites[metaEnv$sites, ];
+
+# Define the table for geographical coverage
+
+geoCoverage <- data.frame(
+  geographicDescription = sprintf(
+    "Site ID %s, restoration project reach %s: %s (site name: %s)",
+    sites$SiteID,
+    sites$Reach,
+    sites$LocationDesc,
+    sites$SiteName
+  ),
+  northBoundingCoordinate = sites$lat,
+  southBoundingCoordinate = sites$lat,
+  eastBoundingCoordinate = sites$long,
+  westBoundingCoordinate = sites$long
+)
+colNames <- c(
+  "Project Site ID",
+  "Restoration reach",
+  "Common site name",
+  "Location description",
+  "Latitude",
+  "Longitude"
+)
+
+# Define the table of categories associated with sites
+
+sitesCategories <- data.frame(
+  attributeName = "siteID",
+  code = metaEnv$sites,
+  definition = sprintf(
+    "Project site number %s",
+    metaEnv$sites
+  )
+)
+
+```
+
+Data are included for the following LTREB project sites. Positive latitudes indicate degrees north and negative longitudes indicate degrees west.
+
+`r knitr::kable(x = sites, row.names = FALSE, col.names = colNames, align = "l")`
+
+```{r}
+
+# Write the geographical coverage table to the EML directory
+
+write.table(
+  x = geoCoverage,
+  file = sprintf(
+    "%s/geographic_coverage.txt",
+    emlalPath
+  ),
+  sep = "\t",
+  row.names = FALSE,
+  quote = FALSE,
+  na = ""
+);
+
+```
+
+
+# Methods
+
+```{r}
+
+write(
+  x = metadataNarrative$methods,
+  file = sprintf(
+    "%s/methods.md",
+    emlalPath
+  )
+);
+
+```
+
+`r metadataNarrative$methods `
+
+
+# Data tables and other entities
+
+```{r}
+
+tableDoc <- function(longmeta) {
+  
+  df <- data.frame(
+    sprintf(
+      fmt = "%s. Property: %s. Entity: %s. Method: %s.",
+      longmeta$Desc,
+      longmeta$Property,
+      longmeta$Entity,
+      longmeta$Method
+    ),
+    longmeta$Units,
+    paste(longmeta$EMLUnits, longmeta$EMLTimeFormat),
+    longmeta$EMLClass,
+    longmeta$EMLMissingCode,
+    longmeta$EMLMissingExp,
+    row.names = rownames(longmeta)
+  );
+  names(df) <- c(
+    "Description",
+    "Units",
+    "EML Units or Time Format",
+    "EML Class",
+    "Missing value code",
+    "Missing value code explanation"
+  );
+  return(df)
+  
+}
+
+tableAtt <- function(longmeta, tableName, emlalPath) {
+
+  attributes <- data.frame(
+    attributeName = rownames(longmeta),
+    attributeDefinition = sprintf(
+      fmt = "%s. Property: %s. Entity: %s. Method: %s.",
+      longmeta$Desc,
+      longmeta$Property,
+      longmeta$Entity,
+      longmeta$Method
+    ),
+    class = longmeta$EMLClass,
+    unit = longmeta$EMLUnits,
+    dateTimeFormatString = longmeta$EMLTimeFormat,
+    missingValueCode = longmeta$EMLMissingCode,
+    missingValueCodeExplanation = longmeta$EMLMissingExp
+  );
+
+  write.table(
+    x = attributes,
+    file = sprintf(
+      "%s/attributes_%s.txt",
+      emlalPath,
+      tableName
+    ),
+    sep = "\t",
+    row.names = FALSE,
+    quote = FALSE,
+    na = ""
+  )
+  
+}
+
+```
+
+#### **Table name:** `r sprintf("%s.csv", metaEnv$tableBiomass.name)`
+
+* **Description:** `r metaEnv$tableBiomass.desc`
+* **Table of attribute metadata:**
+
+```{r}
+
+# Convert the column metadata to long form
+
+longmeta <- as.data.frame(t(as.matrix(metaEnv$tableBiomass.meta)));
+
+```
+
+`r knitr::kable(tableDoc(longmeta)) `
+
+```{r}
+
+tableAtt(
+  longmeta = longmeta, 
+  tableName = metaEnv$tableBiomass.name, 
+  emlalPath = emlalPath
+);
+
+# Write the categorical variable tables to the EML directory
+
+sitesCategories <- rbind(
+  sitesCategories,
+  data.frame(
+    attributeName = rep("categoryBiomass", times = 2),
+    code = c("High", "Low"),
+    definition = c(
+      "High abundance of filamentous algae",
+      "Low abundance of filamntous algae, biomass dominated by other epilithon"
+    )
+  )
+)
+
+write.table(
+  x = rbind(
+    sitesCategories,
+    data.frame(
+      attributeName = rep("repID", times = 5),
+      code = c("1", "2", "3", "4", "5"),
+      definition = c(
+        "Replicate sample 1",
+        "Replicate sample 2",
+        "Replicate sample 3",
+        "Replicate sample 4",
+        "Replicate sample 5"
+      )
+    )
+  ),
+  file = sprintf(
+    "%s/catvars_%s.txt",
+    emlalPath,
+    metaEnv$tableBiomass.name
+  ),
+  sep = "\t",
+  row.names = FALSE,
+  quote = FALSE,
+  na = ""
+);
+
+```
+
+
+```{r results = 'asis'}
+
+otherNames <- c(
+  "Biomass_2017-18_vis.pdf"
+);
+otherDescs <- c(
+  paste(
+    "Basic visualization of the eplithic biomass data included in this product",
+    "(postscript data file)."
+  )
+);
+
+cat(paste("\n\n#### **Other file name:** ", otherNames, "\n\n* **Description:**", otherDescs));
+
+```
+
+
+# Zip the pipeline
+
+Create the pipeline zip files. Warnings with status 12 are normal if the zip file already exists and no files need to be freshened.
+
+### 01_input.zip
+
+```{r results = "hold"}
+
+# inputPath <- "./01_input";
+# system(
+#    command = paste(
+#       "zip",
+#       ifelse (file.exists("./04_product/01_input.zip"), "-ru", "-r"),
+#       "./04_product/01_input.zip",
+#       paste(
+#          sprintf(
+#             fmt = c(
+#                "\"%s/2017/chl afdm 8_29_17.xlsx\"",
+#                "\"%s/2017/chl afdm 9_15_17.xlsx\"",
+#                "\"%s/2017/chl afdm 9_28_2017.xlsx\"",
+#                "\"%s/2017/LTREB_August-15-2017 Field-Lab Notebook biweekly.xlsx\"",
+#                "\"%s/2017/LTREB_August-30-2017 Field-Lab Notebook biweekly.xlsx\"",
+#                "\"%s/2017/September-15-2017 Field-Lab Notebook biweekly.xlsx\"",
+#                "\"%s/2017/September-28-2017 Field-Lab Notebook biweekly.xlsx\"",
+#                "\"%s/2018/August-16-2018 LTREB Field-Lab notebook biweekly.xlsx\"",
+#                "\"%s/2018/August-30-2018 LTREB Field-Lab notebook biweekly.xlsx\"",
+#                "\"%s/2018/chl afdm 8_16_18.xlsx\"",
+#                "\"%s/2018/chl afdm 8_30_18.xlsx\"",
+#                "\"%s/2018/chl afdm 9_27_18.xlsx\"",
+#                "\"%s/2018/chl afdm 10_26_17.xlsx\"",
+#                "\"%s/2018/chl afdm7_18_18.xlsx\"",
+#                "\"%s/2018/July-18-2018 Field-Lab Notebook biweekly.xlsx\"",
+#                "\"%s/2018/October-26-2017 Field-Lab Notebook biweekly.xlsx\"",
+#                "\"%s/2018/September 27-2018 Field-Lab Notebook biweekly.xlsx\"",
+#                "\"%s/meta/2021 Site Table.xlsx\"",
+#                "%s/meta/attributes.xlsx",
+#                "%s/meta/people.xlsx"
+#             ),
+#             inputPath
+#          ),
+#          collapse = " "
+#       )
+#    ),
+#    intern = TRUE
+# )
+
+```
+
+### 02_protocol.zip:
+
+```{r results = "hold"}
+
+# protocolPath <- "./02_protocol";
+# system(
+#   command = paste(
+#     "zip",
+#     ifelse (file.exists("./04_product/02_protocol.zip"), "-ru", "-r"),
+#     "./04_product/02_protocol.zip",
+#     paste(
+#       sprintf(
+#         fmt = c(
+#           "%s/.Rprofile",
+#           "%s/01_processing.Rmd",
+#           "%s/01_processing_compile.R",
+#           "%s/10_metadata.Rmd",
+#           "%s/10_metadata_compile.R",
+#           "%s/99_runall.R",
+#           "%s/RStudioProject.Rproj"
+#         ),
+#         protocolPath
+#       ),
+#       collapse = " "
+#     )
+#   ),
+#   intern = TRUE
+# );
+
+```
+
+### 03_incremental.zip:
+
+```{r results = "hold"}
+
+# incrementalPath <- "./03_incremental";
+# system(
+#   command = paste(
+#     "zip",
+#     ifelse (file.exists("./04_product/03_incremental.zip"), "-ru", "-r"),
+#     "./04_product/03_incremental.zip",
+#     paste(
+#       sprintf(
+#         fmt = c(
+#           "%s/processing_notes.html",
+#           "%s/LTREB_BIOMASS_PIGMENTS_2017_ISF_RFL_2021_10_04.csv",
+#           "%s/LTREB_BIOMASS_PIGMENTS_2018_ISF_RFL_2021_10_04.csv",
+#           "%s/meta/abstract.md",
+#           "%s/meta/intellectual_rights.md",
+#           "%s/meta/LTREB_BIOMASS_PIGMENTS_2017_DICTIONARY.xlsx",
+#           "%s/meta/LTREB_BIOMASS_PIGMENTS_2017_EDI_METADATA.docx",
+#           "%s/meta/LTREB_BIOMASS_PIGMENTS_2018_DICTIONARY.xlsx",
+#           "%s/meta/LTREB_BIOMASS_PIGMENTS_2018_EDI_METADATA.docx",
+#           "%s/meta/methods.md",
+#           "%s/meta/purpose.txt"
+#         ),
+#         incrementalPath
+#       ),
+#       collapse = " "
+#     )
+#   ),
+#   intern = TRUE
+# );
+
+```
+
+
+# Test build of EML file
+
+```{r}
+
+if (exists("customUnits")) {
+  
+  write.table(
+    x = customUnits,
+    file = sprintf(
+      "%s/custom_units.txt",
+      emlalPath
+    ),
+    sep = "\t",
+    row.names = FALSE,
+    quote = FALSE,
+    na = ""
+  )
+  
+}
+
+customUnitsOut <- function() {
+  if(exists("customUnits")) {
+    return(
+      c(
+        "Custom units table: <BR><BR>",
+        knitr::kable(customUnits, row.names = FALSE, align = "l")
+      )
+    );
+  }
+}
+
+```
+
+`r if(exists("customUnits")) { "Custom units table: <BR><BR>"} `
+`r if(exists("customUnits")) { knitr::kable(customUnits, row.names = FALSE, align = "l") } `
+
+Output from the call to EMLassemblyline::make_eml:
+
+```{r}
+
+package.id <- "edi.872.1"
+
+emlFilePath <- sprintf(
+  "./04_product/%s.xml",
+  package.id
+);
+
+makeEML <- function() {
+  
+  EMLassemblyline::make_eml(
+    path = emlalPath,
+    data.path = "./04_product",
+    eml.path = "./04_product", 
+    dataset.title = metadataNarrative$title, 
+    temporal.coverage = c(
+      format(metaEnv$startTime, "%Y-%m-%d"), 
+      format(metaEnv$endTime, "%Y-%m-%d")
+    ), 
+    maintenance.description = maintenance.description, 
+    data.table = sprintf(
+      "%s.csv",
+      c(
+        metaEnv$tableBiomass.name
+      )
+    ), 
+    data.table.description = c(
+        metaEnv$tableBiomass.desc
+    ),
+    data.table.quote.character = rep("\"", times = 9),
+    other.entity = otherNames,
+    other.entity.description = otherDescs,
+    user.id = "UCFRResearch",
+    user.domain = "EDI", 
+    package.id = package.id
+  );
+  
+  # Read the eml file
+  
+  emlxml <- xml2::read_xml(x = emlFilePath);
+  
+  # Replace intellectual rights with markdown element
+  
+  intRights <- xml2::xml_find_first(emlxml, ".//dataset/intellectualRights");
+  
+  markdown <- intRights %>% 
+    xml2::xml_replace("intellectualRights") %>% 
+    xml2::xml_add_child("markdown");
+  xml2::xml_text(markdown) <- gsub(
+    pattern = "\n\n", 
+    replacement = "\r\n\r\n", 
+    metadataNarrative$intellectualRights
+  );
+  
+  # Add the purpose element
+  
+  coverage <- xml2::xml_find_first(emlxml, ".//dataset/coverage");
+  purpose <- coverage %>% xml2::xml_add_sibling("purpose") %>% xml2::xml_add_child("markdown");
+  xml2::xml_text(purpose) <- metadataNarrative$purpose;
+  
+  # Write the xml
+  
+  xml2::write_xml(emlxml, file = emlFilePath);
+  
+}
+
+makeEML();
+
+```
+
+Output from the call to EMLassemblyline::issues: 
+
+```{r}
+
+EMLassemblyline::issues();
+
+```
+
+
+# Summary of R session used to compile this Rmarkdown
+
+```{r results = "markup"}
+
+print(sessionInfo()) 
+
+```

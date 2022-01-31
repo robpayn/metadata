@@ -22,8 +22,6 @@ OrderedList <- R6Class(
   classname = "OrderedList",
   public = list(
 
-    elementFactory = NULL,
-
     elements = NULL,
 
     input = NULL,
@@ -39,13 +37,10 @@ OrderedList <- R6Class(
     buttonAddLabel = NULL,
 
     initialize = function(
-      elementFactory,
       name,
       buttonAddLabel = "Add"
     )
     {
-
-      self$elementFactory <- elementFactory;
 
       self$name <- name;
 
@@ -59,13 +54,65 @@ OrderedList <- R6Class(
 
     },
 
+    copyData = function(copy) {
+
+      lapply(
+        X = self$elements,
+        FUN = function(element) {
+          self$removeElement(element);
+          self$removeElementUI(element);
+        }
+      );
+
+      lapply(
+        X = copy$elements,
+        FUN = function(element) {
+          self$addElement(copy = element);
+        }
+      );
+
+      invisible(self);
+
+    },
+
+    updateShinyUI = function() {
+
+      lapply(
+        X = self$elements,
+        FUN = function(element) {
+          insertUI(
+            session = self$session,
+            selector = sprintf("#%s", self$idDivList),
+            ui = self$createElementUI(element)
+          );
+          self$createElementServer(element);
+        }
+      );
+
+      invisible(self);
+
+    },
+
     createShinyUI = function() {
 
       return(
 
         list(
 
-          tags$div(id = self$idDivList),
+          do.call(
+            what = tags$div,
+            c(
+              unname(
+                lapply(
+                  X = self$elements,
+                  FUN = function(element) {
+                    self$createElementUI(element);
+                  }
+                )
+              ),
+              list(id = self$idDivList)
+            )
+          ),
 
           actionButton(
             inputId = self$idButtonAddElement,
@@ -84,11 +131,24 @@ OrderedList <- R6Class(
       self$output <- output;
       self$session <- session;
 
+      lapply(
+        X = self$elements,
+        FUN = function(element) {
+          self$createElementServer(element)
+        }
+      );
+
       observeEvent(
         eventExpr = input[[self$idButtonAddElement]],
         handlerExpr = {
 
-          self$addElementUI(self$addElement());
+          element <- self$addElement();
+          insertUI(
+            session = self$session,
+            selector = sprintf("#%s", self$idDivList),
+            ui = self$createElementUI(element)
+          );
+          self$createElementServer(element);
 
         }
       );
@@ -97,29 +157,31 @@ OrderedList <- R6Class(
 
     },
 
-    addElement = function() {
+    addElement = function(copy = NULL) {
 
       self$idCounter <- self$idCounter + 1;
       id <- sprintf("%s_%d", self$name, self$idCounter);
-      self$elements[[id]] <- self$elementFactory$createElement(
-        name = id
+      self$elements[[id]] <- self$createElement(
+        name = id,
+        copy = copy
       );
 
       return( self$elements[[id]] );
 
     },
 
-    addElementUI = function(element) {
+    createElementUI = function(element) {
 
-      insertUI(
-        session = self$session,
-        selector = sprintf("#%s", self$idDivList),
-        ui = tags$div(
+      return(
+
+        tags$div(
 
           do.call(
             what = wellPanel,
             args = c(
+
               element$createShinyUI(),
+
               list(
                 actionButton(
                   inputId = element$idButtonDelete,
@@ -140,7 +202,12 @@ OrderedList <- R6Class(
           id = element$name
 
         )
+
       );
+
+    },
+
+    createElementServer = function(element) {
 
       element$createShinyServer(self$input, self$output, self$session);
 
@@ -208,8 +275,8 @@ OrderedList <- R6Class(
 
         lapply(
           X = self$elements,
-          FUN = function(x) {
-            self$removeElementUI(x)
+          FUN = function(element) {
+            self$removeElementUI(element)
           }
         )
 
@@ -221,12 +288,7 @@ OrderedList <- R6Class(
         self$elements[[index]] <- to;
         names(self$elements)[index] <- self$elements[[index]]$name;
 
-        lapply(
-          X = self$elements,
-          FUN = function(x) {
-            self$addElementUI(x);
-          }
-        )
+        self$updateShinyUI();
 
       }
 
@@ -254,12 +316,7 @@ OrderedList <- R6Class(
         self$elements[[index]] <- to;
         names(self$elements)[index] <- self$elements[[index]]$name;
 
-        lapply(
-          X = self$elements,
-          FUN = function(x) {
-            self$addElementUI(x);
-          }
-        )
+        self$updateShinyUI();
 
       }
 

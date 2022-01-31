@@ -26,13 +26,13 @@ TemplatePerson <- R6Class(
 
     getPeopleIDs = function() {
 
-      return( people$internalUniqueID );
+      return( self$people$internalUniqueID );
 
     },
 
     getPersonInfo = function(personID) {
 
-      return( people[personID, ] );
+      return( self$people[personID, ] );
 
     }
 

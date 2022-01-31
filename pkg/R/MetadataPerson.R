@@ -7,6 +7,7 @@
 #' @importFrom shiny textInput
 #' @importFrom shiny updateTextInput
 #' @importFrom shiny observeEvent
+#' @importFrom shiny tags
 
 # Class MetadataPerson ####
 
@@ -39,6 +40,9 @@ MetadataPerson <- R6Class(
     idTextEmail = NULL,
     idTextORCID = NULL,
     idTextRole = NULL,
+    idTextProject = NULL,
+    idTextAgency = NULL,
+    idTextAwardNumber = NULL,
 
     givenName = NULL,
     middleName = NULL,
@@ -47,8 +51,21 @@ MetadataPerson <- R6Class(
     email = NULL,
     orcid = NULL,
     role = NULL,
+    project = NULL,
+    agency = NULL,
+    awardNumber = NULL,
 
-    initialize = function(name, templatePerson = NULL, role = NULL) {
+    roleDefined = NULL,
+    funding = NULL,
+
+    initialize = function(
+      name,
+      templatePerson = NULL,
+      role = NULL,
+      funding = FALSE,
+      copy = NULL
+    )
+    {
 
       super$initialize(
         name = name
@@ -66,10 +83,40 @@ MetadataPerson <- R6Class(
       self$idTextEmail <- sprintf("%s_textEmail", name);
       self$idTextORCID <- sprintf("%s_textORCID", name)
       self$idTextRole <- sprintf("%s_textRole", name);
+      self$idTextProject = sprintf("%s_textProject", name);
+      self$idTextAgency = sprintf("%s_textAgency", name);
+      self$idTextAwardNumber = sprintf("%s_textAwardNumber", name);
 
-      if (!is.null(role)) {
+      self$roleDefined <- !is.null(role);
+      if (self$roleDefined) {
         self$role <- role;
       }
+
+      self$funding <- funding;
+
+      if (!is.null(copy)) {
+        self$copyData(copy);
+      }
+
+    },
+
+    copyData = function(metadataPerson) {
+
+      self$givenName <- metadataPerson$givenName;
+      self$middleName <- metadataPerson$middleName;
+      self$surname <- metadataPerson$surname;
+      self$org <- metadataPerson$org;
+      self$email <- metadataPerson$email;
+      self$orcid <- metadataPerson$orcid;
+      self$role <- metadataPerson$role;
+      self$project <- metadataPerson$project;
+      self$agency <- metadataPerson$agency;
+      self$awardNumber <- metadataPerson$awardNumber;
+
+      self$roleDefined <- metadataPerson$roleDefined;
+      self$funding <- metadataPerson$funding;
+
+      invisible(self);
 
     },
 
@@ -114,14 +161,35 @@ MetadataPerson <- R6Class(
         )
       );
 
-      if (is.null(self$role)) {
+      if (!self$roleDefined) {
+        fields[[length(fields) + 1]] <- textInput(
+          inputId = self$idTextRole,
+          label = "Role",
+          value = self$role,
+          width = "100%"
+        );
+      }
+
+      if (self$funding) {
         fields <- c(
           fields,
           list(
             textInput(
-              inputId = self$idTextRole,
-              label = "Role",
-              value = self$role,
+              inputId = self$idTextProject,
+              label = "Project",
+              value = self$project,
+              width = "100%"
+            ),
+            textInput(
+              inputId = self$idTextAgency,
+              label = "Agency",
+              value = self$agency,
+              width = "100%"
+            ),
+            textInput(
+              inputId = self$idTextAwardNumber,
+              label = "Award number",
+              value = self$awardNumber,
               width = "100%"
             )
           )
@@ -135,7 +203,10 @@ MetadataPerson <- R6Class(
             selectInput(
               inputId = self$idSelectUniqueID,
               label = "Directory unique ID",
-              choices = self$templatePerson$getPeopleIDs()
+              choices = c(
+                "(Clear)",
+                self$templatePerson$getPeopleIDs()
+              )
             ),
             actionButton(
               inputId = self$idButtonApplyTemplate,
@@ -187,12 +258,34 @@ MetadataPerson <- R6Class(
         value = self$orcid
       );
 
-      if (is.null(self$role)) {
+      if (!self$roleDefined) {
         updateTextInput(
           session = self$session,
           inputId = self$idTextRole,
           value = self$role
         );
+      }
+
+      if (self$funding) {
+
+        updateTextInput(
+          session = self$session,
+          inputId = self$idTextProject,
+          value = self$project
+        );
+
+        updateTextInput(
+          session = self$session,
+          inputId = self$idTextAgency,
+          value = self$agency
+        );
+
+        updateTextInput(
+          session = self$session,
+          inputId = self$idTextAwardNumber,
+          value = self$awardNumber
+        );
+
       }
 
       invisible(self);
@@ -209,51 +302,86 @@ MetadataPerson <- R6Class(
         eventExpr = input[[self$idTextGivenName]],
         handlerExpr = {
           self$givenName <- input[[self$idTextGivenName]];
-        }
+        },
+        ignoreInit = TRUE
       );
 
       observeEvent(
         eventExpr = input[[self$idTextMiddleName]],
         handlerExpr = {
           self$middleName <- input[[self$idTextMiddleName]];
-        }
+        },
+        ignoreInit = TRUE
       );
 
       observeEvent(
         eventExpr = input[[self$idTextSurname]],
         handlerExpr = {
           self$surname <- input[[self$idTextSurname]];
-        }
+        },
+        ignoreInit = TRUE
       );
 
       observeEvent(
         eventExpr = input[[self$idTextOrg]],
         handlerExpr = {
           self$org <- input[[self$idTextOrg]];
-        }
+        },
+        ignoreInit = TRUE
       );
 
       observeEvent(
         eventExpr = input[[self$idTextEmail]],
         handlerExpr = {
           self$email <- input[[self$idTextEmail]];
-        }
+        },
+        ignoreInit = TRUE
       );
 
       observeEvent(
         eventExpr = input[[self$idTextORCID]],
         handlerExpr = {
           self$orcid <- input[[self$idTextORCID]];
-        }
+        },
+        ignoreInit = TRUE
       );
 
-      if (is.null(self$role)) {
+      if (!self$roleDefined) {
         observeEvent(
           eventExpr = input[[self$idTextRole]],
           handlerExpr = {
-            self$role<- input[[self$idTextRole]];
-          }
+            self$role <- input[[self$idTextRole]];
+          },
+          ignoreInit = TRUE
         );
+      }
+
+      if (self$funding) {
+
+        observeEvent(
+          eventExpr = input[[self$idTextProject]],
+          handlerExpr = {
+            self$project <- input[[self$idTextProject]];
+          },
+          ignoreInit = TRUE
+        );
+
+        observeEvent(
+          eventExpr = input[[self$idTextAgency]],
+          handlerExpr = {
+            self$agency <- input[[self$idTextAgency]];
+          },
+          ignoreInit = TRUE
+        );
+
+        observeEvent(
+          eventExpr = input[[self$idTextAwardNumber]],
+          handlerExpr = {
+            self$awardNumber <- input[[self$idTextAwardNumber]];
+          },
+          ignoreInit = TRUE
+        );
+
       }
 
       if (!is.null(self$templatePerson)) {
@@ -270,6 +398,12 @@ MetadataPerson <- R6Class(
             self$org <- person$organizationName;
             self$email <- person$electronicMailAddress;
             self$orcid <- person$ORCID;
+
+            if (self$funding) {
+              self$project <- person$projectTitle;
+              self$agency <- person$fundingAgency;
+              self$awardNumber <- person$fundingNumber;
+            }
 
             self$updateShinyUI();
           },
