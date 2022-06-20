@@ -9,22 +9,52 @@ A base class for tracking an element of an ordered list
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{OrderedListElement$new()}}
-\item \href{#method-clone}{\code{OrderedListElement$clone()}}
+\item \href{#method-OrderedListElement-new}{\code{OrderedListElement$new()}}
+\item \href{#method-OrderedListElement-createShinyUI}{\code{OrderedListElement$createShinyUI()}}
+\item \href{#method-OrderedListElement-removeShinyUI}{\code{OrderedListElement$removeShinyUI()}}
+\item \href{#method-OrderedListElement-createShinyServer}{\code{OrderedListElement$createShinyServer()}}
+\item \href{#method-OrderedListElement-clone}{\code{OrderedListElement$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-OrderedListElement-new"></a>}}
+\if{latex}{\out{\hypertarget{method-OrderedListElement-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OrderedListElement$new(name)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OrderedListElement$new(name, content, orderedList)}\if{html}{\out{</div>}}
 }
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-OrderedListElement-createShinyUI"></a>}}
+\if{latex}{\out{\hypertarget{method-OrderedListElement-createShinyUI}{}}}
+\subsection{Method \code{createShinyUI()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OrderedListElement$createShinyUI()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OrderedListElement-removeShinyUI"></a>}}
+\if{latex}{\out{\hypertarget{method-OrderedListElement-removeShinyUI}{}}}
+\subsection{Method \code{removeShinyUI()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OrderedListElement$removeShinyUI()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OrderedListElement-createShinyServer"></a>}}
+\if{latex}{\out{\hypertarget{method-OrderedListElement-createShinyServer}{}}}
+\subsection{Method \code{createShinyServer()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OrderedListElement$createShinyServer()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OrderedListElement-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-OrderedListElement-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

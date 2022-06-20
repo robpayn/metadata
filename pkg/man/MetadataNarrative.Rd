@@ -10,17 +10,17 @@ A modular shiny interface for managing narrative metadata for a
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{MetadataNarrative$new()}}
-\item \href{#method-copyData}{\code{MetadataNarrative$copyData()}}
-\item \href{#method-createShinyUI}{\code{MetadataNarrative$createShinyUI()}}
-\item \href{#method-createShinyServer}{\code{MetadataNarrative$createShinyServer()}}
-\item \href{#method-updateShinyUI}{\code{MetadataNarrative$updateShinyUI()}}
-\item \href{#method-clone}{\code{MetadataNarrative$clone()}}
+\item \href{#method-MetadataNarrative-new}{\code{MetadataNarrative$new()}}
+\item \href{#method-MetadataNarrative-copyData}{\code{MetadataNarrative$copyData()}}
+\item \href{#method-MetadataNarrative-createShinyUI}{\code{MetadataNarrative$createShinyUI()}}
+\item \href{#method-MetadataNarrative-createShinyServer}{\code{MetadataNarrative$createShinyServer()}}
+\item \href{#method-MetadataNarrative-updateShinyUI}{\code{MetadataNarrative$updateShinyUI()}}
+\item \href{#method-MetadataNarrative-clone}{\code{MetadataNarrative$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-MetadataNarrative-new"></a>}}
+\if{latex}{\out{\hypertarget{method-MetadataNarrative-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{MetadataNarrative$new(name = "narrative", copy = NULL)}\if{html}{\out{</div>}}
@@ -28,8 +28,8 @@ A modular shiny interface for managing narrative metadata for a
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-copyData"></a>}}
-\if{latex}{\out{\hypertarget{method-copyData}{}}}
+\if{html}{\out{<a id="method-MetadataNarrative-copyData"></a>}}
+\if{latex}{\out{\hypertarget{method-MetadataNarrative-copyData}{}}}
 \subsection{Method \code{copyData()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{MetadataNarrative$copyData(metadataNarrative)}\if{html}{\out{</div>}}
@@ -37,8 +37,8 @@ A modular shiny interface for managing narrative metadata for a
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-createShinyUI"></a>}}
-\if{latex}{\out{\hypertarget{method-createShinyUI}{}}}
+\if{html}{\out{<a id="method-MetadataNarrative-createShinyUI"></a>}}
+\if{latex}{\out{\hypertarget{method-MetadataNarrative-createShinyUI}{}}}
 \subsection{Method \code{createShinyUI()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{MetadataNarrative$createShinyUI()}\if{html}{\out{</div>}}
@@ -46,8 +46,8 @@ A modular shiny interface for managing narrative metadata for a
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-createShinyServer"></a>}}
-\if{latex}{\out{\hypertarget{method-createShinyServer}{}}}
+\if{html}{\out{<a id="method-MetadataNarrative-createShinyServer"></a>}}
+\if{latex}{\out{\hypertarget{method-MetadataNarrative-createShinyServer}{}}}
 \subsection{Method \code{createShinyServer()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{MetadataNarrative$createShinyServer(input, output, session)}\if{html}{\out{</div>}}
@@ -55,8 +55,8 @@ A modular shiny interface for managing narrative metadata for a
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-updateShinyUI"></a>}}
-\if{latex}{\out{\hypertarget{method-updateShinyUI}{}}}
+\if{html}{\out{<a id="method-MetadataNarrative-updateShinyUI"></a>}}
+\if{latex}{\out{\hypertarget{method-MetadataNarrative-updateShinyUI}{}}}
 \subsection{Method \code{updateShinyUI()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{MetadataNarrative$updateShinyUI()}\if{html}{\out{</div>}}
@@ -64,8 +64,8 @@ A modular shiny interface for managing narrative metadata for a
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-MetadataNarrative-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-MetadataNarrative-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

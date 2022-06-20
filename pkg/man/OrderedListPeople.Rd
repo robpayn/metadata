@@ -12,31 +12,28 @@ An ordered list of people
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{OrderedListPeople$new()}}
-\item \href{#method-createElement}{\code{OrderedListPeople$createElement()}}
-\item \href{#method-clone}{\code{OrderedListPeople$clone()}}
+\item \href{#method-OrderedListPeople-new}{\code{OrderedListPeople$new()}}
+\item \href{#method-OrderedListPeople-createElement}{\code{OrderedListPeople$createElement()}}
+\item \href{#method-OrderedListPeople-clone}{\code{OrderedListPeople$clone()}}
 }
 }
-\if{html}{
-\out{<details ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="metadata" data-topic="OrderedList" data-id="addElement">}\href{../../metadata/html/OrderedList.html#method-addElement}{\code{metadata::OrderedList$addElement()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="metadata" data-topic="OrderedList" data-id="copyData">}\href{../../metadata/html/OrderedList.html#method-copyData}{\code{metadata::OrderedList$copyData()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="metadata" data-topic="OrderedList" data-id="createElementServer">}\href{../../metadata/html/OrderedList.html#method-createElementServer}{\code{metadata::OrderedList$createElementServer()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="metadata" data-topic="OrderedList" data-id="createElementUI">}\href{../../metadata/html/OrderedList.html#method-createElementUI}{\code{metadata::OrderedList$createElementUI()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="metadata" data-topic="OrderedList" data-id="createShinyServer">}\href{../../metadata/html/OrderedList.html#method-createShinyServer}{\code{metadata::OrderedList$createShinyServer()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="metadata" data-topic="OrderedList" data-id="createShinyUI">}\href{../../metadata/html/OrderedList.html#method-createShinyUI}{\code{metadata::OrderedList$createShinyUI()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="metadata" data-topic="OrderedList" data-id="moveElementDown">}\href{../../metadata/html/OrderedList.html#method-moveElementDown}{\code{metadata::OrderedList$moveElementDown()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="metadata" data-topic="OrderedList" data-id="moveElementUp">}\href{../../metadata/html/OrderedList.html#method-moveElementUp}{\code{metadata::OrderedList$moveElementUp()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="metadata" data-topic="OrderedList" data-id="removeElement">}\href{../../metadata/html/OrderedList.html#method-removeElement}{\code{metadata::OrderedList$removeElement()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="metadata" data-topic="OrderedList" data-id="removeElementUI">}\href{../../metadata/html/OrderedList.html#method-removeElementUI}{\code{metadata::OrderedList$removeElementUI()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="metadata" data-topic="OrderedList" data-id="updateShinyUI">}\href{../../metadata/html/OrderedList.html#method-updateShinyUI}{\code{metadata::OrderedList$updateShinyUI()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="metadata" data-topic="OrderedList" data-id="addElement"><a href='../../metadata/html/OrderedList.html#method-OrderedList-addElement'><code>metadata::OrderedList$addElement()</code></a></li>
+<li><span class="pkg-link" data-pkg="metadata" data-topic="OrderedList" data-id="copyData"><a href='../../metadata/html/OrderedList.html#method-OrderedList-copyData'><code>metadata::OrderedList$copyData()</code></a></li>
+<li><span class="pkg-link" data-pkg="metadata" data-topic="OrderedList" data-id="createShinyServer"><a href='../../metadata/html/OrderedList.html#method-OrderedList-createShinyServer'><code>metadata::OrderedList$createShinyServer()</code></a></li>
+<li><span class="pkg-link" data-pkg="metadata" data-topic="OrderedList" data-id="createShinyUI"><a href='../../metadata/html/OrderedList.html#method-OrderedList-createShinyUI'><code>metadata::OrderedList$createShinyUI()</code></a></li>
+<li><span class="pkg-link" data-pkg="metadata" data-topic="OrderedList" data-id="moveElementDown"><a href='../../metadata/html/OrderedList.html#method-OrderedList-moveElementDown'><code>metadata::OrderedList$moveElementDown()</code></a></li>
+<li><span class="pkg-link" data-pkg="metadata" data-topic="OrderedList" data-id="moveElementUp"><a href='../../metadata/html/OrderedList.html#method-OrderedList-moveElementUp'><code>metadata::OrderedList$moveElementUp()</code></a></li>
+<li><span class="pkg-link" data-pkg="metadata" data-topic="OrderedList" data-id="removeElement"><a href='../../metadata/html/OrderedList.html#method-OrderedList-removeElement'><code>metadata::OrderedList$removeElement()</code></a></li>
+<li><span class="pkg-link" data-pkg="metadata" data-topic="OrderedList" data-id="updateShinyUI"><a href='../../metadata/html/OrderedList.html#method-OrderedList-updateShinyUI'><code>metadata::OrderedList$updateShinyUI()</code></a></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-OrderedListPeople-new"></a>}}
+\if{latex}{\out{\hypertarget{method-OrderedListPeople-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OrderedListPeople$new(
@@ -51,8 +48,8 @@ An ordered list of people
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-createElement"></a>}}
-\if{latex}{\out{\hypertarget{method-createElement}{}}}
+\if{html}{\out{<a id="method-OrderedListPeople-createElement"></a>}}
+\if{latex}{\out{\hypertarget{method-OrderedListPeople-createElement}{}}}
 \subsection{Method \code{createElement()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OrderedListPeople$createElement(name, copy = NULL)}\if{html}{\out{</div>}}
@@ -60,8 +57,8 @@ An ordered list of people
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-OrderedListPeople-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-OrderedListPeople-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

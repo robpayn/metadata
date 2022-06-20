@@ -60,7 +60,7 @@ OrderedList <- R6Class(
         X = self$elements,
         FUN = function(element) {
           self$removeElement(element);
-          self$removeElementUI(element);
+          element$removeShinyUI();
         }
       );
 
@@ -83,9 +83,9 @@ OrderedList <- R6Class(
           insertUI(
             session = self$session,
             selector = sprintf("#%s", self$idDivList),
-            ui = self$createElementUI(element)
+            ui = element$createShinyUI()
           );
-          self$createElementServer(element);
+          element$createShinyServer();
         }
       );
 
@@ -106,7 +106,7 @@ OrderedList <- R6Class(
                 lapply(
                   X = self$elements,
                   FUN = function(element) {
-                    self$createElementUI(element);
+                    element$createShinyUI();
                   }
                 )
               ),
@@ -134,7 +134,7 @@ OrderedList <- R6Class(
       lapply(
         X = self$elements,
         FUN = function(element) {
-          self$createElementServer(element)
+          element$createShinyServer();
         }
       );
 
@@ -146,9 +146,9 @@ OrderedList <- R6Class(
           insertUI(
             session = self$session,
             selector = sprintf("#%s", self$idDivList),
-            ui = self$createElementUI(element)
+            ui = element$createShinyUI()
           );
-          self$createElementServer(element);
+          element$createShinyServer();
 
         }
       );
@@ -170,99 +170,9 @@ OrderedList <- R6Class(
 
     },
 
-    createElementUI = function(element) {
-
-      return(
-
-        tags$div(
-
-          do.call(
-            what = wellPanel,
-            args = c(
-
-              element$createShinyUI(),
-
-              list(
-                actionButton(
-                  inputId = element$idButtonDelete,
-                  label = "Delete"
-                ),
-                actionButton(
-                  inputId = element$idButtonMoveup,
-                  label = "Move up"
-                ),
-                actionButton(
-                  inputId = element$idButtonMovedown,
-                  label = "Move down"
-                )
-              )
-            )
-          ),
-
-          id = element$name
-
-        )
-
-      );
-
-    },
-
-    createElementServer = function(element) {
-
-      element$createShinyServer(self$input, self$output, self$session);
-
-      element$obsDelete <- observeEvent(
-        eventExpr = self$input[[element$idButtonDelete]],
-        handlerExpr = {
-
-          self$removeElement(element);
-          self$removeElementUI(element);
-
-        },
-        ignoreInit = TRUE
-      );
-
-      element$obsMoveup <- observeEvent(
-        eventExpr = self$input[[element$idButtonMoveup]],
-        handlerExpr = {
-
-          self$moveElementUp(element);
-
-        },
-        ignoreInit = TRUE
-      );
-
-      element$obsMovedown <- observeEvent(
-        eventExpr = self$input[[element$idButtonMovedown]],
-        handlerExpr = {
-
-          self$moveElementDown(element);
-
-        },
-        ignoreInit = TRUE
-      );
-
-      invisible(self);
-
-    },
-
     removeElement = function(element) {
 
       self$elements <- self$elements[names(self$elements) != element$name];
-
-      invisible(self);
-
-    },
-
-    removeElementUI = function(element) {
-
-      removeUI(
-        session = self$session,
-        selector = sprintf("#%s", element$name)
-      );
-      element$obsDelete$destroy();
-      element$obsMoveup$destroy();
-      element$obsMovedown$destroy();
 
       invisible(self);
 
@@ -276,7 +186,7 @@ OrderedList <- R6Class(
         lapply(
           X = self$elements,
           FUN = function(element) {
-            self$removeElementUI(element)
+            element$removeShinyUI()
           }
         )
 
@@ -303,8 +213,8 @@ OrderedList <- R6Class(
 
         lapply(
           X = self$elements,
-          FUN = function(x) {
-            self$removeElementUI(x);
+          FUN = function(element) {
+            element$removeShinyUI();
           }
         )
 

@@ -9,24 +9,21 @@ A modular shiny interface for managing an ordered list of elements
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{OrderedList$new()}}
-\item \href{#method-copyData}{\code{OrderedList$copyData()}}
-\item \href{#method-updateShinyUI}{\code{OrderedList$updateShinyUI()}}
-\item \href{#method-createShinyUI}{\code{OrderedList$createShinyUI()}}
-\item \href{#method-createShinyServer}{\code{OrderedList$createShinyServer()}}
-\item \href{#method-addElement}{\code{OrderedList$addElement()}}
-\item \href{#method-createElementUI}{\code{OrderedList$createElementUI()}}
-\item \href{#method-createElementServer}{\code{OrderedList$createElementServer()}}
-\item \href{#method-removeElement}{\code{OrderedList$removeElement()}}
-\item \href{#method-removeElementUI}{\code{OrderedList$removeElementUI()}}
-\item \href{#method-moveElementUp}{\code{OrderedList$moveElementUp()}}
-\item \href{#method-moveElementDown}{\code{OrderedList$moveElementDown()}}
-\item \href{#method-clone}{\code{OrderedList$clone()}}
+\item \href{#method-OrderedList-new}{\code{OrderedList$new()}}
+\item \href{#method-OrderedList-copyData}{\code{OrderedList$copyData()}}
+\item \href{#method-OrderedList-updateShinyUI}{\code{OrderedList$updateShinyUI()}}
+\item \href{#method-OrderedList-createShinyUI}{\code{OrderedList$createShinyUI()}}
+\item \href{#method-OrderedList-createShinyServer}{\code{OrderedList$createShinyServer()}}
+\item \href{#method-OrderedList-addElement}{\code{OrderedList$addElement()}}
+\item \href{#method-OrderedList-removeElement}{\code{OrderedList$removeElement()}}
+\item \href{#method-OrderedList-moveElementUp}{\code{OrderedList$moveElementUp()}}
+\item \href{#method-OrderedList-moveElementDown}{\code{OrderedList$moveElementDown()}}
+\item \href{#method-OrderedList-clone}{\code{OrderedList$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-OrderedList-new"></a>}}
+\if{latex}{\out{\hypertarget{method-OrderedList-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OrderedList$new(name, buttonAddLabel = "Add")}\if{html}{\out{</div>}}
@@ -34,8 +31,8 @@ A modular shiny interface for managing an ordered list of elements
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-copyData"></a>}}
-\if{latex}{\out{\hypertarget{method-copyData}{}}}
+\if{html}{\out{<a id="method-OrderedList-copyData"></a>}}
+\if{latex}{\out{\hypertarget{method-OrderedList-copyData}{}}}
 \subsection{Method \code{copyData()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OrderedList$copyData(copy)}\if{html}{\out{</div>}}
@@ -43,8 +40,8 @@ A modular shiny interface for managing an ordered list of elements
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-updateShinyUI"></a>}}
-\if{latex}{\out{\hypertarget{method-updateShinyUI}{}}}
+\if{html}{\out{<a id="method-OrderedList-updateShinyUI"></a>}}
+\if{latex}{\out{\hypertarget{method-OrderedList-updateShinyUI}{}}}
 \subsection{Method \code{updateShinyUI()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OrderedList$updateShinyUI()}\if{html}{\out{</div>}}
@@ -52,8 +49,8 @@ A modular shiny interface for managing an ordered list of elements
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-createShinyUI"></a>}}
-\if{latex}{\out{\hypertarget{method-createShinyUI}{}}}
+\if{html}{\out{<a id="method-OrderedList-createShinyUI"></a>}}
+\if{latex}{\out{\hypertarget{method-OrderedList-createShinyUI}{}}}
 \subsection{Method \code{createShinyUI()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OrderedList$createShinyUI()}\if{html}{\out{</div>}}
@@ -61,8 +58,8 @@ A modular shiny interface for managing an ordered list of elements
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-createShinyServer"></a>}}
-\if{latex}{\out{\hypertarget{method-createShinyServer}{}}}
+\if{html}{\out{<a id="method-OrderedList-createShinyServer"></a>}}
+\if{latex}{\out{\hypertarget{method-OrderedList-createShinyServer}{}}}
 \subsection{Method \code{createShinyServer()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OrderedList$createShinyServer(input, output, session)}\if{html}{\out{</div>}}
@@ -70,8 +67,8 @@ A modular shiny interface for managing an ordered list of elements
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-addElement"></a>}}
-\if{latex}{\out{\hypertarget{method-addElement}{}}}
+\if{html}{\out{<a id="method-OrderedList-addElement"></a>}}
+\if{latex}{\out{\hypertarget{method-OrderedList-addElement}{}}}
 \subsection{Method \code{addElement()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OrderedList$addElement(copy = NULL)}\if{html}{\out{</div>}}
@@ -79,26 +76,8 @@ A modular shiny interface for managing an ordered list of elements
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-createElementUI"></a>}}
-\if{latex}{\out{\hypertarget{method-createElementUI}{}}}
-\subsection{Method \code{createElementUI()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OrderedList$createElementUI(element)}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-createElementServer"></a>}}
-\if{latex}{\out{\hypertarget{method-createElementServer}{}}}
-\subsection{Method \code{createElementServer()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OrderedList$createElementServer(element)}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeElement"></a>}}
-\if{latex}{\out{\hypertarget{method-removeElement}{}}}
+\if{html}{\out{<a id="method-OrderedList-removeElement"></a>}}
+\if{latex}{\out{\hypertarget{method-OrderedList-removeElement}{}}}
 \subsection{Method \code{removeElement()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OrderedList$removeElement(element)}\if{html}{\out{</div>}}
@@ -106,17 +85,8 @@ A modular shiny interface for managing an ordered list of elements
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeElementUI"></a>}}
-\if{latex}{\out{\hypertarget{method-removeElementUI}{}}}
-\subsection{Method \code{removeElementUI()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OrderedList$removeElementUI(element)}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-moveElementUp"></a>}}
-\if{latex}{\out{\hypertarget{method-moveElementUp}{}}}
+\if{html}{\out{<a id="method-OrderedList-moveElementUp"></a>}}
+\if{latex}{\out{\hypertarget{method-OrderedList-moveElementUp}{}}}
 \subsection{Method \code{moveElementUp()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OrderedList$moveElementUp(element)}\if{html}{\out{</div>}}
@@ -124,8 +94,8 @@ A modular shiny interface for managing an ordered list of elements
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-moveElementDown"></a>}}
-\if{latex}{\out{\hypertarget{method-moveElementDown}{}}}
+\if{html}{\out{<a id="method-OrderedList-moveElementDown"></a>}}
+\if{latex}{\out{\hypertarget{method-OrderedList-moveElementDown}{}}}
 \subsection{Method \code{moveElementDown()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OrderedList$moveElementDown(element)}\if{html}{\out{</div>}}
@@ -133,8 +103,8 @@ A modular shiny interface for managing an ordered list of elements
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-OrderedList-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-OrderedList-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

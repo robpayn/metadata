@@ -9,15 +9,15 @@ A template for a person element
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{TemplatePerson$new()}}
-\item \href{#method-getPeopleIDs}{\code{TemplatePerson$getPeopleIDs()}}
-\item \href{#method-getPersonInfo}{\code{TemplatePerson$getPersonInfo()}}
-\item \href{#method-clone}{\code{TemplatePerson$clone()}}
+\item \href{#method-TemplatePerson-new}{\code{TemplatePerson$new()}}
+\item \href{#method-TemplatePerson-getPeopleIDs}{\code{TemplatePerson$getPeopleIDs()}}
+\item \href{#method-TemplatePerson-getPersonInfo}{\code{TemplatePerson$getPersonInfo()}}
+\item \href{#method-TemplatePerson-clone}{\code{TemplatePerson$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-TemplatePerson-new"></a>}}
+\if{latex}{\out{\hypertarget{method-TemplatePerson-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TemplatePerson$new(people)}\if{html}{\out{</div>}}
@@ -25,8 +25,8 @@ A template for a person element
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getPeopleIDs"></a>}}
-\if{latex}{\out{\hypertarget{method-getPeopleIDs}{}}}
+\if{html}{\out{<a id="method-TemplatePerson-getPeopleIDs"></a>}}
+\if{latex}{\out{\hypertarget{method-TemplatePerson-getPeopleIDs}{}}}
 \subsection{Method \code{getPeopleIDs()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TemplatePerson$getPeopleIDs()}\if{html}{\out{</div>}}
@@ -34,8 +34,8 @@ A template for a person element
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getPersonInfo"></a>}}
-\if{latex}{\out{\hypertarget{method-getPersonInfo}{}}}
+\if{html}{\out{<a id="method-TemplatePerson-getPersonInfo"></a>}}
+\if{latex}{\out{\hypertarget{method-TemplatePerson-getPersonInfo}{}}}
 \subsection{Method \code{getPersonInfo()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TemplatePerson$getPersonInfo(personID)}\if{html}{\out{</div>}}
@@ -43,8 +43,8 @@ A template for a person element
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-TemplatePerson-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-TemplatePerson-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

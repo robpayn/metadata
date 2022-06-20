@@ -21,7 +21,6 @@
 #'
 MetadataPerson <- R6Class(
   classname = "MetadataPerson",
-  inherit = OrderedListElement,
   public = list(
 
     input = NULL,
@@ -66,10 +65,6 @@ MetadataPerson <- R6Class(
       copy = NULL
     )
     {
-
-      super$initialize(
-        name = name
-      );
 
       self$templatePerson <- templatePerson;
 

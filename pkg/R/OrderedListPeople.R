@@ -50,12 +50,16 @@ OrderedListPeople <- R6Class(
 
       return(
 
-        MetadataPerson$new(
+        OrderedListElement$new(
           name = name,
-          templatePerson = self$templatePerson,
-          role = self$role,
-          funding = self$funding,
-          copy = copy
+          content = MetadataPerson$new(
+            name = name,
+            templatePerson = self$templatePerson,
+            role = self$role,
+            funding = self$funding,
+            copy = copy$content
+          ),
+          orderedList = self
         )
 
       );

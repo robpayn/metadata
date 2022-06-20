@@ -6,29 +6,20 @@
 \description{
 A modular shiny interface for managing metdata for a person
 }
-\section{Super class}{
-\code{\link[metadata:OrderedListElement]{metadata::OrderedListElement}} -> \code{MetadataPerson}
-}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{MetadataPerson$new()}}
-\item \href{#method-copyData}{\code{MetadataPerson$copyData()}}
-\item \href{#method-createShinyUI}{\code{MetadataPerson$createShinyUI()}}
-\item \href{#method-updateShinyUI}{\code{MetadataPerson$updateShinyUI()}}
-\item \href{#method-createShinyServer}{\code{MetadataPerson$createShinyServer()}}
-\item \href{#method-clone}{\code{MetadataPerson$clone()}}
+\item \href{#method-MetadataPerson-new}{\code{MetadataPerson$new()}}
+\item \href{#method-MetadataPerson-copyData}{\code{MetadataPerson$copyData()}}
+\item \href{#method-MetadataPerson-createShinyUI}{\code{MetadataPerson$createShinyUI()}}
+\item \href{#method-MetadataPerson-updateShinyUI}{\code{MetadataPerson$updateShinyUI()}}
+\item \href{#method-MetadataPerson-createShinyServer}{\code{MetadataPerson$createShinyServer()}}
+\item \href{#method-MetadataPerson-clone}{\code{MetadataPerson$clone()}}
 }
-}
-\if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
-\itemize{
-}
-\out{</details>}
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-MetadataPerson-new"></a>}}
+\if{latex}{\out{\hypertarget{method-MetadataPerson-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{MetadataPerson$new(
@@ -42,8 +33,8 @@ A modular shiny interface for managing metdata for a person
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-copyData"></a>}}
-\if{latex}{\out{\hypertarget{method-copyData}{}}}
+\if{html}{\out{<a id="method-MetadataPerson-copyData"></a>}}
+\if{latex}{\out{\hypertarget{method-MetadataPerson-copyData}{}}}
 \subsection{Method \code{copyData()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{MetadataPerson$copyData(metadataPerson)}\if{html}{\out{</div>}}
@@ -51,8 +42,8 @@ A modular shiny interface for managing metdata for a person
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-createShinyUI"></a>}}
-\if{latex}{\out{\hypertarget{method-createShinyUI}{}}}
+\if{html}{\out{<a id="method-MetadataPerson-createShinyUI"></a>}}
+\if{latex}{\out{\hypertarget{method-MetadataPerson-createShinyUI}{}}}
 \subsection{Method \code{createShinyUI()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{MetadataPerson$createShinyUI()}\if{html}{\out{</div>}}
@@ -60,8 +51,8 @@ A modular shiny interface for managing metdata for a person
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-updateShinyUI"></a>}}
-\if{latex}{\out{\hypertarget{method-updateShinyUI}{}}}
+\if{html}{\out{<a id="method-MetadataPerson-updateShinyUI"></a>}}
+\if{latex}{\out{\hypertarget{method-MetadataPerson-updateShinyUI}{}}}
 \subsection{Method \code{updateShinyUI()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{MetadataPerson$updateShinyUI()}\if{html}{\out{</div>}}
@@ -69,8 +60,8 @@ A modular shiny interface for managing metdata for a person
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-createShinyServer"></a>}}
-\if{latex}{\out{\hypertarget{method-createShinyServer}{}}}
+\if{html}{\out{<a id="method-MetadataPerson-createShinyServer"></a>}}
+\if{latex}{\out{\hypertarget{method-MetadataPerson-createShinyServer}{}}}
 \subsection{Method \code{createShinyServer()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{MetadataPerson$createShinyServer(input, output, session)}\if{html}{\out{</div>}}
@@ -78,8 +69,8 @@ A modular shiny interface for managing metdata for a person
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-MetadataPerson-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-MetadataPerson-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

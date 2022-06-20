@@ -112,13 +112,13 @@ creators <- do.call(
     FUN = function(creator) {
       return(
         data.frame(
-          creator$givenName,
-          creator$middleName,
-          creator$surname,
-          creator$org,
-          creator$email,
-          creator$orcid,
-          creator$role
+          creator$content$givenName,
+          creator$content$middleName,
+          creator$content$surname,
+          creator$content$org,
+          creator$content$email,
+          creator$content$orcid,
+          creator$content$role
         )
       )
     }
@@ -208,13 +208,13 @@ others <- do.call(
     FUN = function(other) {
       return(
         data.frame(
-          other$givenName,
-          other$middleName,
-          other$surname,
-          other$org,
-          other$email,
-          other$orcid,
-          other$role
+          other$content$givenName,
+          other$content$middleName,
+          other$content$surname,
+          other$content$org,
+          other$content$email,
+          other$content$orcid,
+          other$content$role
         )
       )
     }
@@ -341,16 +341,16 @@ funding <- do.call(
     FUN = function(fund) {
       return(
         data.frame(
-          fund$givenName,
-          fund$middleName,
-          fund$surname,
-          fund$org,
-          fund$email,
-          fund$orcid,
-          fund$role,
-          fund$project,
-          fund$agency,
-          fund$awardNumber
+          fund$content$givenName,
+          fund$content$middleName,
+          fund$content$surname,
+          fund$content$org,
+          fund$content$email,
+          fund$content$orcid,
+          fund$content$role,
+          fund$content$project,
+          fund$content$agency,
+          fund$content$awardNumber
         )
       )
     }
