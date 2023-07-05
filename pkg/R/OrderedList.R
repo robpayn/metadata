@@ -42,36 +42,15 @@ OrderedList <- R6Class(
     )
     {
 
-      self$name <- name;
+      self$name <- name
 
-      self$elements <- vector(mode = "list", length = 0);
+      self$elements <- vector(mode = "list", length = 0)
 
-      self$idCounter <- 0;
+      self$idCounter <- 0
 
-      self$idDivList <- sprintf("%s_divList", self$name);
-      self$idButtonAddElement <- sprintf("%s_buttonAddElement", self$name);
-      self$buttonAddLabel <- buttonAddLabel;
-
-    },
-
-    copyData = function(copy) {
-
-      lapply(
-        X = self$elements,
-        FUN = function(element) {
-          self$removeElement(element);
-          element$removeShinyUI();
-        }
-      );
-
-      lapply(
-        X = copy$elements,
-        FUN = function(element) {
-          self$addElement(copy = element);
-        }
-      );
-
-      invisible(self);
+      self$idDivList <- sprintf("%s_divList", self$name)
+      self$idButtonAddElement <- sprintf("%s_buttonAddElement", self$name)
+      self$buttonAddLabel <- buttonAddLabel
 
     },
 
@@ -157,13 +136,13 @@ OrderedList <- R6Class(
 
     },
 
-    addElement = function(copy = NULL) {
+    addElement = function(elementInfo = NULL) {
 
       self$idCounter <- self$idCounter + 1;
       id <- sprintf("%s_%d", self$name, self$idCounter);
       self$elements[[id]] <- self$createElement(
         name = id,
-        copy = copy
+        elementInfo = elementInfo
       );
 
       return( self$elements[[id]] );
@@ -235,4 +214,4 @@ OrderedList <- R6Class(
     }
 
   )
-);
+)

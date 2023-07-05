@@ -10,7 +10,8 @@ A modular shiny interface for managing personnel on a data product
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-MetadataPeople-new}{\code{MetadataPeople$new()}}
-\item \href{#method-MetadataPeople-copyData}{\code{MetadataPeople$copyData()}}
+\item \href{#method-MetadataPeople-read}{\code{MetadataPeople$read()}}
+\item \href{#method-MetadataPeople-write}{\code{MetadataPeople$write()}}
 \item \href{#method-MetadataPeople-updateShinyUI}{\code{MetadataPeople$updateShinyUI()}}
 \item \href{#method-MetadataPeople-createShinyUI}{\code{MetadataPeople$createShinyUI()}}
 \item \href{#method-MetadataPeople-createShinyServer}{\code{MetadataPeople$createShinyServer()}}
@@ -26,17 +27,28 @@ A modular shiny interface for managing personnel on a data product
   name = "people",
   templatePerson = NULL,
   templateFunding = NULL,
-  copy = NULL
+  path = "./01_input/meta",
+  fileNames = c(creators = "ppl_creators.csv", contact = "ppl_contact.csv", others =
+    "ppl_others.csv", funding = "ppl_funding.csv")
 )}\if{html}{\out{</div>}}
 }
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-MetadataPeople-copyData"></a>}}
-\if{latex}{\out{\hypertarget{method-MetadataPeople-copyData}{}}}
-\subsection{Method \code{copyData()}}{
+\if{html}{\out{<a id="method-MetadataPeople-read"></a>}}
+\if{latex}{\out{\hypertarget{method-MetadataPeople-read}{}}}
+\subsection{Method \code{read()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{MetadataPeople$copyData(metadataPeople)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{MetadataPeople$read(path = self$path, fileNames = self$fileNames)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-MetadataPeople-write"></a>}}
+\if{latex}{\out{\hypertarget{method-MetadataPeople-write}{}}}
+\subsection{Method \code{write()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MetadataPeople$write(path = self$path, fileNames = self$fileNames)}\if{html}{\out{</div>}}
 }
 
 }

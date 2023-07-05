@@ -43,75 +43,117 @@ MetadataPerson <- R6Class(
     idTextAgency = NULL,
     idTextAwardNumber = NULL,
 
-    givenName = NULL,
-    middleName = NULL,
-    surname = NULL,
-    org = NULL,
-    email = NULL,
-    orcid = NULL,
-    role = NULL,
-    project = NULL,
-    agency = NULL,
-    awardNumber = NULL,
+    givenName = "",
+    middleName = "",
+    surname = "",
+    org = "",
+    email = "",
+    orcid = "",
+    role = "",
+    project = "",
+    agency = "",
+    awardNumber = "",
 
-    roleDefined = NULL,
-    funding = NULL,
+    roleDefined = FALSE,
+    funding = FALSE,
 
     initialize = function(
       name,
+      personInfo = NULL,
       templatePerson = NULL,
       role = NULL,
-      funding = FALSE,
-      copy = NULL
+      funding = FALSE
     )
     {
 
-      self$templatePerson <- templatePerson;
+      self$templatePerson <- templatePerson
 
-      self$idSelectUniqueID <- sprintf("%s_selectUniqueID", name);
-      self$idButtonApplyTemplate <- sprintf("%s_buttonApplyTemplate", name);
+      self$idSelectUniqueID <- sprintf("%s_selectUniqueID", name)
+      self$idButtonApplyTemplate <- sprintf("%s_buttonApplyTemplate", name)
 
-      self$idTextGivenName <- sprintf("%s_textGivenName", name);
-      self$idTextMiddleName <- sprintf("%s_textMiddleName", name);
-      self$idTextSurname <- sprintf("%s_textSurname", name);
-      self$idTextOrg <- sprintf("%s_textOrg", name);
-      self$idTextEmail <- sprintf("%s_textEmail", name);
+      self$idTextGivenName <- sprintf("%s_textGivenName", name)
+      self$idTextMiddleName <- sprintf("%s_textMiddleName", name)
+      self$idTextSurname <- sprintf("%s_textSurname", name)
+      self$idTextOrg <- sprintf("%s_textOrg", name)
+      self$idTextEmail <- sprintf("%s_textEmail", name)
       self$idTextORCID <- sprintf("%s_textORCID", name)
-      self$idTextRole <- sprintf("%s_textRole", name);
-      self$idTextProject = sprintf("%s_textProject", name);
-      self$idTextAgency = sprintf("%s_textAgency", name);
-      self$idTextAwardNumber = sprintf("%s_textAwardNumber", name);
+      self$idTextRole <- sprintf("%s_textRole", name)
+      self$idTextProject = sprintf("%s_textProject", name)
+      self$idTextAgency = sprintf("%s_textAgency", name)
+      self$idTextAwardNumber = sprintf("%s_textAwardNumber", name)
 
-      self$roleDefined <- !is.null(role);
+      self$roleDefined <- !is.null(role)
       if (self$roleDefined) {
-        self$role <- role;
+        self$role <- role
       }
 
-      self$funding <- funding;
+      self$funding <- funding
 
-      if (!is.null(copy)) {
-        self$copyData(copy);
+      if (!is.null(personInfo)) {
+        self$copyPersonInfo(personInfo = personInfo)
       }
 
     },
 
-    copyData = function(metadataPerson) {
+    getEmptyDataFrame = function() {
 
-      self$givenName <- metadataPerson$givenName;
-      self$middleName <- metadataPerson$middleName;
-      self$surname <- metadataPerson$surname;
-      self$org <- metadataPerson$org;
-      self$email <- metadataPerson$email;
-      self$orcid <- metadataPerson$orcid;
-      self$role <- metadataPerson$role;
-      self$project <- metadataPerson$project;
-      self$agency <- metadataPerson$agency;
-      self$awardNumber <- metadataPerson$awardNumber;
+      return(
+        data.frame(
+          givenName = character(length = rowCount),
+          middleName = character(length = rowCount),
+          surname = character(length = rowCount),
+          org = character(length = rowCount),
+          email = character(length = rowCount),
+          orcid = character(length = rowCount),
+          role = character(length = rowCount),
+          project = character(length = rowCount),
+          agency = character(length = rowCount),
+          awardNumber = character(length = rowCount),
+          roleDefined = integer(length = rowCount),
+          funding = integer(length = rowCount)
+        )
+      )
 
-      self$roleDefined <- metadataPerson$roleDefined;
-      self$funding <- metadataPerson$funding;
+    },
 
-      invisible(self);
+    getPersonInfo = function() {
+
+      return(
+        list(
+          givenName = self$givenName,
+          middleName = self$middleName,
+          surname = self$surname,
+          org = self$org,
+          email = self$email,
+          orcid = self$orcid,
+          role = self$role,
+          project = self$project,
+          agency = self$agency,
+          awardNumber = self$awardNumber,
+          roleDefined = as.integer(self$roleDefined),
+          funding = as.integer(self$funding)
+        )
+      )
+
+    },
+
+    copyPersonInfo = function(personInfo) {
+
+      self$givenName <- personInfo$givenName
+      self$middleName <- personInfo$middleName
+      self$surname <- personInfo$surname
+      self$org <- personInfo$org
+      self$email <- personInfo$email
+      self$orcid <- personInfo$orcid
+      self$role <- personInfo$role
+      self$project <- personInfo$project
+      self$agency <- personInfo$agency
+      self$awardNumber <- personInfo$awardNumber
+
+      self$roleDefined <- as.logical(personInfo$roleDefined)
+      self$funding <- as.logical(personInfo$funding)
+
+      invisible(self)
 
     },
 

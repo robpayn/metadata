@@ -13,6 +13,8 @@ An ordered list of people
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-OrderedListPeople-new}{\code{OrderedListPeople$new()}}
+\item \href{#method-OrderedListPeople-read}{\code{OrderedListPeople$read()}}
+\item \href{#method-OrderedListPeople-write}{\code{OrderedListPeople$write()}}
 \item \href{#method-OrderedListPeople-createElement}{\code{OrderedListPeople$createElement()}}
 \item \href{#method-OrderedListPeople-clone}{\code{OrderedListPeople$clone()}}
 }
@@ -21,7 +23,6 @@ An ordered list of people
 <details><summary>Inherited methods</summary>
 <ul>
 <li><span class="pkg-link" data-pkg="metadata" data-topic="OrderedList" data-id="addElement"><a href='../../metadata/html/OrderedList.html#method-OrderedList-addElement'><code>metadata::OrderedList$addElement()</code></a></li>
-<li><span class="pkg-link" data-pkg="metadata" data-topic="OrderedList" data-id="copyData"><a href='../../metadata/html/OrderedList.html#method-OrderedList-copyData'><code>metadata::OrderedList$copyData()</code></a></li>
 <li><span class="pkg-link" data-pkg="metadata" data-topic="OrderedList" data-id="createShinyServer"><a href='../../metadata/html/OrderedList.html#method-OrderedList-createShinyServer'><code>metadata::OrderedList$createShinyServer()</code></a></li>
 <li><span class="pkg-link" data-pkg="metadata" data-topic="OrderedList" data-id="createShinyUI"><a href='../../metadata/html/OrderedList.html#method-OrderedList-createShinyUI'><code>metadata::OrderedList$createShinyUI()</code></a></li>
 <li><span class="pkg-link" data-pkg="metadata" data-topic="OrderedList" data-id="moveElementDown"><a href='../../metadata/html/OrderedList.html#method-OrderedList-moveElementDown'><code>metadata::OrderedList$moveElementDown()</code></a></li>
@@ -39,11 +40,29 @@ An ordered list of people
 \if{html}{\out{<div class="r">}}\preformatted{OrderedListPeople$new(
   name,
   buttonAddLabel = "Add person",
+  filePath = NULL,
   templatePerson = NULL,
   role = NULL,
-  funding = FALSE,
-  copy = NULL
+  funding = FALSE
 )}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OrderedListPeople-read"></a>}}
+\if{latex}{\out{\hypertarget{method-OrderedListPeople-read}{}}}
+\subsection{Method \code{read()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OrderedListPeople$read(filePath = self$filePath)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OrderedListPeople-write"></a>}}
+\if{latex}{\out{\hypertarget{method-OrderedListPeople-write}{}}}
+\subsection{Method \code{write()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OrderedListPeople$write(filePath = self$filePath)}\if{html}{\out{</div>}}
 }
 
 }
@@ -52,7 +71,7 @@ An ordered list of people
 \if{latex}{\out{\hypertarget{method-OrderedListPeople-createElement}{}}}
 \subsection{Method \code{createElement()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OrderedListPeople$createElement(name, copy = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OrderedListPeople$createElement(name, elementInfo = NULL)}\if{html}{\out{</div>}}
 }
 
 }

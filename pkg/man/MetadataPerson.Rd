@@ -10,7 +10,9 @@ A modular shiny interface for managing metdata for a person
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-MetadataPerson-new}{\code{MetadataPerson$new()}}
-\item \href{#method-MetadataPerson-copyData}{\code{MetadataPerson$copyData()}}
+\item \href{#method-MetadataPerson-getEmptyDataFrame}{\code{MetadataPerson$getEmptyDataFrame()}}
+\item \href{#method-MetadataPerson-getPersonInfo}{\code{MetadataPerson$getPersonInfo()}}
+\item \href{#method-MetadataPerson-copyPersonInfo}{\code{MetadataPerson$copyPersonInfo()}}
 \item \href{#method-MetadataPerson-createShinyUI}{\code{MetadataPerson$createShinyUI()}}
 \item \href{#method-MetadataPerson-updateShinyUI}{\code{MetadataPerson$updateShinyUI()}}
 \item \href{#method-MetadataPerson-createShinyServer}{\code{MetadataPerson$createShinyServer()}}
@@ -24,20 +26,38 @@ A modular shiny interface for managing metdata for a person
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{MetadataPerson$new(
   name,
+  personInfo = NULL,
   templatePerson = NULL,
   role = NULL,
-  funding = FALSE,
-  copy = NULL
+  funding = FALSE
 )}\if{html}{\out{</div>}}
 }
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-MetadataPerson-copyData"></a>}}
-\if{latex}{\out{\hypertarget{method-MetadataPerson-copyData}{}}}
-\subsection{Method \code{copyData()}}{
+\if{html}{\out{<a id="method-MetadataPerson-getEmptyDataFrame"></a>}}
+\if{latex}{\out{\hypertarget{method-MetadataPerson-getEmptyDataFrame}{}}}
+\subsection{Method \code{getEmptyDataFrame()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{MetadataPerson$copyData(metadataPerson)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{MetadataPerson$getEmptyDataFrame()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-MetadataPerson-getPersonInfo"></a>}}
+\if{latex}{\out{\hypertarget{method-MetadataPerson-getPersonInfo}{}}}
+\subsection{Method \code{getPersonInfo()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MetadataPerson$getPersonInfo()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-MetadataPerson-copyPersonInfo"></a>}}
+\if{latex}{\out{\hypertarget{method-MetadataPerson-copyPersonInfo}{}}}
+\subsection{Method \code{copyPersonInfo()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MetadataPerson$copyPersonInfo(personInfo)}\if{html}{\out{</div>}}
 }
 
 }

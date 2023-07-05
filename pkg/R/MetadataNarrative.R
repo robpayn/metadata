@@ -29,70 +29,142 @@ MetadataNarrative <- R6Class(
     output = NULL,
     session = NULL,
 
+    path = NULL,
     name = NULL,
+    fileNames = NULL,
 
     idTextTitle = NULL,
-    title = "Replace this with the title of the data product",
+    title = NULL,
 
     idTextAbstract = NULL,
-    abstract = "Replace this with the abstract for the data product",
+    abstract = NULL,
     idButtonImportAbstract = NULL,
 
     idTextPurpose = NULL,
-    purpose = "Replace this with the purpose of generating the data product",
+    purpose = NULL,
     idButtonImportPurpose = NULL,
 
     idTextIntellectualRights = NULL,
-    intellectualRights =
-      "Replace this with the intellectual rights to the data product",
+    intellectualRights = NULL,
     idButtonImportIntellectualRights = NULL,
 
     idTextMethods = NULL,
-    methods = "Replace this with the methods used to generate the data product",
+    methods = NULL,
     idButtonImportMethods = NULL,
 
     initialize = function(
       name = "narrative",
-      copy = NULL
+      path = "./01_input/meta",
+      fileNames = c(
+        title = "narr_title.txt",
+        abstract = "narr_abstract.md",
+        purpose = "narr_purpose.md",
+        rights = "narr_rights.md",
+        methods = "narr_methods.md"
+      )
     )
     {
 
-      self$name <- name;
+      self$name <- name
+      self$path <- path
+      self$fileNames <- fileNames
 
-      self$idTextTitle <- sprintf("%s_textTitle", self$name);
+      if (file.exists(self$path)) {
+        self$read()
+      } else {
+        dir.create(path = self$path, recursive = TRUE)
+      }
 
-      self$idTextAbstract <- sprintf("%s_textAbstract", self$name);
+      self$idTextTitle <- sprintf("%s_textTitle", self$name)
+
+      self$idTextAbstract <- sprintf("%s_textAbstract", self$name)
       self$idButtonImportAbstract <-
-        sprintf("%s_buttonImportAbstract", self$name);
+        sprintf("%s_buttonImportAbstract", self$name)
 
-      self$idTextPurpose <- sprintf("%s_textPurpose", self$name);
+      self$idTextPurpose <- sprintf("%s_textPurpose", self$name)
       self$idButtonImportPurpose <-
-        sprintf("%s_buttonImportPurpose", self$name);
+        sprintf("%s_buttonImportPurpose", self$name)
 
       self$idTextIntellectualRights <-
-        sprintf("%s_textIntellectualRights", self$name);
+        sprintf("%s_textIntellectualRights", self$name)
       self$idButtonImportIntellectualRights <-
-        sprintf("%s_buttonImportIntellectualRights", self$name);
+        sprintf("%s_buttonImportIntellectualRights", self$name)
 
-      self$idTextMethods <- sprintf("%s_textMethods", self$name);
+      self$idTextMethods <- sprintf("%s_textMethods", self$name)
       self$idButtonImportMethods <-
-        sprintf("%s_buttonImportMethods", self$name);
-
-      if (!is.null(copy)) {
-        self$copyData(copy);
-      }
+        sprintf("%s_buttonImportMethods", self$name)
 
     },
 
-    copyData = function(metadataNarrative) {
+    read = function(path = self$path, fileNames = self$fileNames) {
 
-      self$title <- metadataNarrative$title;
-      self$abstract <- metadataNarrative$abstract;
-      self$purpose <- metadataNarrative$purpose;
-      self$intellectualRights <- metadataNarrative$intellectualRights;
-      self$methods <- metadataNarrative$methods;
+      filePath <- sprintf("%s/%s", path, fileNames["title"])
+      if (file.exists(filePath)) {
+        self$title <-
+          readChar(con = filePath, nchars = file.size(filePath))
+      } else {
+        self$title <-
+          "Replace this with the title of the data product"
+      }
 
-      invisible(self);
+      filePath <- sprintf("%s/%s", path, fileNames["abstract"])
+      if (file.exists(filePath)) {
+        self$abstract <-
+          readChar(con = filePath, nchars = file.size(filePath))
+      } else {
+        self$abstract <-
+          "Replace this with the abstract for the data product"
+      }
+
+      filePath <- sprintf("%s/%s", path, fileNames["purpose"])
+      if (file.exists(filePath)) {
+        self$purpose <-
+          readChar(con = filePath, nchars = file.size(filePath))
+      } else {
+        self$purpose <-
+          "Replace this with the purpose of generating the data product"
+      }
+
+      filePath <- sprintf("%s/%s", path, fileNames["rights"])
+      if (file.exists(filePath)) {
+        self$intellectualRights <-
+          readChar(con = filePath, nchars = file.size(filePath))
+      } else {
+        self$intellectualRights <-
+          "Replace this with the intellectual rights to the data product"
+      }
+
+      filePath <- sprintf("%s/%s", path, fileNames["methods"])
+      if (file.exists(filePath)) {
+        self$methods <-
+          readChar(con = filePath, nchars = file.size(filePath))
+      } else {
+        self$methods <-
+          "Replace this with the methods used to generate the data product"
+      }
+
+      invisible(self)
+
+    },
+
+    write = function(path = self$path, fileNames = self$fileNames) {
+
+      filePath <- sprintf("%s/%s", path, fileNames["title"])
+      write(x = self$title, file = filePath)
+
+      filePath <- sprintf("%s/%s", path, fileNames["abstract"])
+      write(x = self$abstract, file = filePath)
+
+      filePath <- sprintf("%s/%s", path, fileNames["purpose"])
+      write(x = self$purpose, file = filePath)
+
+      filePath <- sprintf("%s/%s", path, fileNames["rights"])
+      write(x = self$intellectualRights, file = filePath)
+
+      filePath <- sprintf("%s/%s", path, fileNames["methods"])
+      write(x = self$methods, file = filePath)
+
+      invisible(self)
 
     },
 

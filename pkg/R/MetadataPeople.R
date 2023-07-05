@@ -19,63 +19,138 @@ MetadataPeople <- R6Class(
   classname = "MetadataPeople",
   public = list(
 
+    path = NULL,
     name = NULL,
+    fileNames = NULL,
 
     creators = NULL,
+    creatorPath = NULL,
     contact = NULL,
+    contactPath = NULL,
     others = NULL,
+    otherPath = NULL,
     funding = NULL,
+    fundingPath = NULL,
 
     initialize = function(
       name = "people",
       templatePerson = NULL,
       templateFunding = NULL,
-      copy = NULL
+      path = "./01_input/meta",
+      fileNames = c(
+        creators = "ppl_creators.csv",
+        contact = "ppl_contact.csv",
+        others = "ppl_others.csv",
+        funding = "ppl_funding.csv"
+      )
     )
     {
 
       self$name <- name;
+      self$path <- path
+      self$fileNames <- fileNames
 
+      if (!file.exists(self$path)) {
+        dir.create(path = self$path, recursive = TRUE)
+      }
+
+      self$creatorPath <-
+        sprintf("%s/%s", self$path, self$fileNames["creators"])
       self$creators <- OrderedListPeople$new(
         name = sprintf("%s_creators", name),
         buttonAddLabel = "Add creator",
+        filePath = self$creatorPath,
         templatePerson = templatePerson,
-        role = "creator",
-        copy = copy$creators
-      );
+        role = "creator"
+      )
 
+      self$contactPath <-
+        sprintf("%s/%s", self$path, self$fileNames["contact"])
+      if (file.exists(self$contactPath)) {
+        personInfo <-
+          read.table(file = self$contactPath, header = TRUE, sep = ",")[1,]
+      } else {
+        personInfo <- NULL
+      }
       self$contact <- MetadataPerson$new(
-        templatePerson = templatePerson,
         name = sprintf("%s_contact", name),
-        role = "contact",
-        copy = copy$contact
-      );
+        personInfo = personInfo,
+        templatePerson = templatePerson,
+        role = "contact"
+      )
 
+      self$otherPath <-
+        sprintf("%s/%s", self$path, self$fileNames["others"])
       self$others <- OrderedListPeople$new(
         name = sprintf("%s_others", name),
-        templatePerson = templatePerson,
-        copy = copy$others
-      );
+        filePath = self$otherPath,
+        templatePerson = templatePerson
+      )
 
+      self$fundingPath <-
+        sprintf("%s/%s", self$path, self$fileNames["funding"])
       self$funding <- OrderedListPeople$new(
         name = sprintf("%s_funding", name),
         buttonAddLabel = "Add funding PI",
+        filePath = self$fundingPath,
         templatePerson = templateFunding,
         role = "PI",
-        funding = TRUE,
-        copy = copy$funding
-      );
+        funding = TRUE
+      )
 
     },
 
-    copyData = function(metadataPeople) {
+    read = function(path = self$path, fileNames = self$fileNames)
+    {
 
-      self$creators$copyData(metadataPeople$creators);
-      self$contact$copyData(metadataPeople$contact);
-      self$others$copyData(metadataPeople$others);
-      self$funding$copyData(metadataPeople$funding);
+      self$creators$read(
+        filePath = sprintf("%s/%s", path, fileNames["creators"])
+      )
 
-      invisible(self);
+      contactPath <- sprintf("%s/%s", path, fileNames["contact"])
+      if (file.exists(contactPath)) {
+        personInfo <- read.table(file = filePath, header = TRUE, sep = ",")[1,]
+      } else {
+        personInfo <- NULL
+      }
+      self$contact$copyPersonInfo(personInfo)
+
+      self$others$read(
+        filePath = sprintf("%s/%s", path, fileNames["others"])
+      )
+
+      self$funding$read(
+        filePath = sprintf("%s/%s", path, fileNames["funding"])
+      )
+
+      invisible(self)
+
+    },
+
+    write = function(path = self$path, fileNames = self$fileNames)
+    {
+
+      self$creators$write(
+        filePath = sprintf("%s/%s", path, fileNames["creators"])
+      )
+
+      df <- as.data.frame(self$contact$getPersonInfo())
+      write.table(
+        df,
+        file = sprintf("%s/%s", path, fileNames["contact"]),
+        sep = ",",
+        row.names = FALSE
+      )
+
+      self$others$write(
+        filePath = sprintf("%s/%s", path, fileNames["others"])
+      )
+
+      self$funding$write(
+        filePath = sprintf("%s/%s", path, fileNames["funding"])
+      )
+
+      invisible(self)
 
     },
 

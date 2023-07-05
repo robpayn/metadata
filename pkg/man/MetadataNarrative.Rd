@@ -11,7 +11,8 @@ A modular shiny interface for managing narrative metadata for a
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-MetadataNarrative-new}{\code{MetadataNarrative$new()}}
-\item \href{#method-MetadataNarrative-copyData}{\code{MetadataNarrative$copyData()}}
+\item \href{#method-MetadataNarrative-read}{\code{MetadataNarrative$read()}}
+\item \href{#method-MetadataNarrative-write}{\code{MetadataNarrative$write()}}
 \item \href{#method-MetadataNarrative-createShinyUI}{\code{MetadataNarrative$createShinyUI()}}
 \item \href{#method-MetadataNarrative-createShinyServer}{\code{MetadataNarrative$createShinyServer()}}
 \item \href{#method-MetadataNarrative-updateShinyUI}{\code{MetadataNarrative$updateShinyUI()}}
@@ -23,16 +24,30 @@ A modular shiny interface for managing narrative metadata for a
 \if{latex}{\out{\hypertarget{method-MetadataNarrative-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{MetadataNarrative$new(name = "narrative", copy = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{MetadataNarrative$new(
+  name = "narrative",
+  path = "./01_input/meta",
+  fileNames = c(title = "narr_title.txt", abstract = "narr_abstract.md", purpose =
+    "narr_purpose.md", rights = "narr_rights.md", methods = "narr_methods.md")
+)}\if{html}{\out{</div>}}
 }
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-MetadataNarrative-copyData"></a>}}
-\if{latex}{\out{\hypertarget{method-MetadataNarrative-copyData}{}}}
-\subsection{Method \code{copyData()}}{
+\if{html}{\out{<a id="method-MetadataNarrative-read"></a>}}
+\if{latex}{\out{\hypertarget{method-MetadataNarrative-read}{}}}
+\subsection{Method \code{read()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{MetadataNarrative$copyData(metadataNarrative)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{MetadataNarrative$read(path = self$path, fileNames = self$fileNames)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-MetadataNarrative-write"></a>}}
+\if{latex}{\out{\hypertarget{method-MetadataNarrative-write}{}}}
+\subsection{Method \code{write()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{MetadataNarrative$write(path = self$path, fileNames = self$fileNames)}\if{html}{\out{</div>}}
 }
 
 }

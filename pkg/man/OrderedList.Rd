@@ -10,7 +10,6 @@ A modular shiny interface for managing an ordered list of elements
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-OrderedList-new}{\code{OrderedList$new()}}
-\item \href{#method-OrderedList-copyData}{\code{OrderedList$copyData()}}
 \item \href{#method-OrderedList-updateShinyUI}{\code{OrderedList$updateShinyUI()}}
 \item \href{#method-OrderedList-createShinyUI}{\code{OrderedList$createShinyUI()}}
 \item \href{#method-OrderedList-createShinyServer}{\code{OrderedList$createShinyServer()}}
@@ -27,15 +26,6 @@ A modular shiny interface for managing an ordered list of elements
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OrderedList$new(name, buttonAddLabel = "Add")}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OrderedList-copyData"></a>}}
-\if{latex}{\out{\hypertarget{method-OrderedList-copyData}{}}}
-\subsection{Method \code{copyData()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OrderedList$copyData(copy)}\if{html}{\out{</div>}}
 }
 
 }
@@ -71,7 +61,7 @@ A modular shiny interface for managing an ordered list of elements
 \if{latex}{\out{\hypertarget{method-OrderedList-addElement}{}}}
 \subsection{Method \code{addElement()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OrderedList$addElement(copy = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OrderedList$addElement(elementInfo = NULL)}\if{html}{\out{</div>}}
 }
 
 }
